@@ -45,7 +45,6 @@ namespace KingsGame
 				// Top face (y = 1.0f)
 				// Define vertices in counter-clockwise (CCW) order with normal pointing out
 				glNormal3f(0, 1, 0);
-				glColor3f(0.0f, 1.0f, 0.0f);     // Green
 				glVertex3f(1.0f, 1.0f, -1.0f);
 				glVertex3f(-1.0f, 1.0f, -1.0f);
 				glVertex3f(-1.0f, 1.0f, 1.0f);
@@ -53,7 +52,6 @@ namespace KingsGame
 
 				// Bottom face (y = -1.0f)
 				glNormal3f(0, -1, 0);
-				glColor3f(1.0f, 0.5f, 0.0f);     // Orange
 				glVertex3f(1.0f, -1.0f, 1.0f);
 				glVertex3f(-1.0f, -1.0f, 1.0f);
 				glVertex3f(-1.0f, -1.0f, -1.0f);
@@ -61,7 +59,6 @@ namespace KingsGame
 
 				// Front face  (z = 1.0f)
 				glNormal3f(0, 0, 1);
-				glColor3f(1.0f, 0.0f, 0.0f);     // Red
 				glVertex3f(1.0f, 1.0f, 1.0f);
 				glVertex3f(-1.0f, 1.0f, 1.0f);
 				glVertex3f(-1.0f, -1.0f, 1.0f);
@@ -69,7 +66,6 @@ namespace KingsGame
 
 				// Back face (z = -1.0f)
 				glNormal3f(0, 0, -1);
-				glColor3f(1.0f, 1.0f, 0.0f);     // Yellow
 				glVertex3f(1.0f, -1.0f, -1.0f);
 				glVertex3f(-1.0f, -1.0f, -1.0f);
 				glVertex3f(-1.0f, 1.0f, -1.0f);
@@ -77,15 +73,13 @@ namespace KingsGame
 
 				// Left face (x = -1.0f)
 				glNormal3f(-1, 0, 0);
-				glColor3f(0.0f, 0.0f, 1.0f);     // Blue
 				glVertex3f(-1.0f, 1.0f, 1.0f);
 				glVertex3f(-1.0f, 1.0f, -1.0f);
 				glVertex3f(-1.0f, -1.0f, -1.0f);
 				glVertex3f(-1.0f, -1.0f, 1.0f);
 
 				// Right face (x = 1.0f)
-				glNormal3f(1, 0, 0);
-				glColor3f(1.0f, 0.0f, 1.0f);     // Magenta
+				glNormal3f(1, 0, 0);				
 				glVertex3f(1.0f, 1.0f, -1.0f);
 				glVertex3f(1.0f, 1.0f, 1.0f);
 				glVertex3f(1.0f, -1.0f, 1.0f);
@@ -99,35 +93,23 @@ namespace KingsGame
 
 				glBegin(GL_TRIANGLES);           // Begin drawing the pyramid with 4 triangles
 				// Front
-				glColor3f(1.0f, 0.0f, 0.0f);     // Red
 				glVertex3f(0.0f, 1.0f, 0.0f);
-				glColor3f(0.0f, 1.0f, 0.0f);     // Green
 				glVertex3f(-1.0f, -1.0f, 1.0f);
-				glColor3f(0.0f, 0.0f, 1.0f);     // Blue
 				glVertex3f(1.0f, -1.0f, 1.0f);
 
 				// Right
-				glColor3f(1.0f, 0.0f, 0.0f);     // Red
 				glVertex3f(0.0f, 1.0f, 0.0f);
-				glColor3f(0.0f, 0.0f, 1.0f);     // Blue
 				glVertex3f(1.0f, -1.0f, 1.0f);
-				glColor3f(0.0f, 1.0f, 0.0f);     // Green
 				glVertex3f(1.0f, -1.0f, -1.0f);
 
 				// Back
-				glColor3f(1.0f, 0.0f, 0.0f);     // Red
 				glVertex3f(0.0f, 1.0f, 0.0f);
-				glColor3f(0.0f, 1.0f, 0.0f);     // Green
 				glVertex3f(1.0f, -1.0f, -1.0f);
-				glColor3f(0.0f, 0.0f, 1.0f);     // Blue
 				glVertex3f(-1.0f, -1.0f, -1.0f);
 
 				// Left
-				glColor3f(1.0f, 0.0f, 0.0f);       // Red
 				glVertex3f(0.0f, 1.0f, 0.0f);
-				glColor3f(0.0f, 0.0f, 1.0f);       // Blue
 				glVertex3f(-1.0f, -1.0f, -1.0f);
-				glColor3f(0.0f, 1.0f, 0.0f);       // Green
 				glVertex3f(-1.0f, -1.0f, 1.0f);
 				glEnd();   // Done drawing the pyramid
 			}
@@ -199,7 +181,6 @@ namespace KingsGame
 		}
 
 	public:
-		//paths, texture1 and texture2 can be null
 		Terrain(int height, int width, int tile)
 		{
 			this->height = height;
@@ -467,7 +448,7 @@ namespace KingsGame
 
 			paused = false;
 			field = new Terrain(50, 50, 25);
-			camera = new SkyCamera(new Vector(0, 0, 0), new Vector(-1, -1, -1));
+			camera = new SkyCamera(new Vector(0, 0, 0), new Vector(0, 0, -1));
 		}
 
 		~Game()
@@ -515,7 +496,7 @@ namespace KingsGame
 			//camera->placeCamera();
 			
 			glRotatef(rot, 0, 1, 0);
-			glTranslatef(0, 0, 8);
+			//glTranslatef(0, 0, 0);
 
 			glPushMatrix();
 			glTranslatef(0,-1,0);
@@ -525,24 +506,28 @@ namespace KingsGame
 			glPushMatrix();
 			glTranslatef(0, 0, 4);
 			glRotatef(rot, 1, 1, 0);
+			glColor3f(0.0f, 0.0f, 1.0f);     // Blue
 			KingsGame::Geometry::Meshes::drawCube(.5);
 			glPopMatrix();
 
 			glPushMatrix();
 			glTranslatef(0, 0, -4);
 			glRotatef(rot, 1, 1, 0);
+			glColor3f(0.0f, 0.0f, 1.0f);     // Blue
 			KingsGame::Geometry::Meshes::drawCube(.5);
 			glPopMatrix();
 
 			glPushMatrix();
 			glTranslatef(4, 0, 0);
 			glRotatef(rot, 1, 1, 0);
+			glColor3f(0.0f, 0.0f, 1.0f);     // Blue
 			KingsGame::Geometry::Meshes::drawPiramid(.5);
 			glPopMatrix();
 
 			glPushMatrix();
 			glTranslatef(-4, 0, 0);
 			glRotatef(rot, 1, 1, 0);
+			glColor3f(0.0f, 0.0f, 1.0f);     // Blue
 			KingsGame::Geometry::Meshes::drawPiramid(.5);
 			glPopMatrix();
 
